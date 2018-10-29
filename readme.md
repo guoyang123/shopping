@@ -1,3 +1,4 @@
+### 前置知识
 #### json 轻量级数据交换格式。
 #####JAVA实体类
  ```
@@ -34,7 +35,7 @@
       ]
       
   ### 项目需求
-  ##### 前台
+  #### 前台
   
     购买
       商品->首页、商品列表、商品详情
@@ -49,14 +50,14 @@
        注册
        修改密码
        
-   ##### 后台  
+   #### 后台  
     管理员登录
     商品管理： 添加商品、修改、商品上下架
     品类管理:查看、添加
     订单管理：查看、发货
     
     
-   ##### 数据表结构设计
+   ### 数据表结构设计
     1，用户表（用户名唯一、MD5加密）
     2，类别表（无限层级表结构）
      id    name     parent_id       
@@ -73,8 +74,9 @@
     5，订单表
     6，订单明细表
     7，支付信息表
-    8，收货地址表     
-  ## mybatis-generator插件用法
+    8，收货地址表 
+   ### 插件    
+  #### 插件一、mybatis-generator插件
   
    1,pom.xml添加插件
    
@@ -102,8 +104,8 @@
              </dependency>
     
    3，创建插件生成的配置文件
-    
-   #### generatorConfig.xml
+  
+   ##### generatorConfig.xml
       
        <?xml version="1.0" encoding="UTF-8" ?>
        <!DOCTYPE generatorConfiguration PUBLIC
@@ -135,6 +137,56 @@
            </context>
        </generatorConfiguration>
   
+  #### 插件二、mybatis分页插件
   
-      
+   1，pom中添加依赖
+   
+      <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper</artifactId>
+        <version>4.1.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.miemiedev</groupId>
+        <artifactId>mybatis-paginator</artifactId>
+        <version>1.2.17</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.jsqlparser</groupId>
+        <artifactId>jsqlparser</artifactId>
+        <version>0.9.4</version>
+      </dependency>
+  
+   2，spring配置文件，sqlSessionFactoryBean中添加分页插件属性
+    
+      <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+          <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+          <property name="mapperLocations" value="classpath:com/neuedu/mapper/*Mapper.xml" ></property>
+         <property name="dataSource" ref="dataSource"></property>
+          <!-- 分页插件 -->
+          <property name="plugins">
+              <array>
+                  <bean class="com.github.pagehelper.PageHelper">
+                      <property name="properties">
+                          <value>
+                              dialect=mysql
+                          </value>
+                      </property>
+                  </bean>
+              </array>
+          </property>
+      </bean>
+  #### 插件三-接口测试插件-restlet
+  
+  
+  
+  ### 搭建ssm框架
+   1,pom.xml
+   2,添加配置文件 
+     spring配置文件
+     springmvc配置文件
+     mybatis配置文件
+     web.xml
+    3,使用框架 
+       
 
