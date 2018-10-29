@@ -182,7 +182,7 @@
      PRIMARY KEY(`id`)
      )ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
    8，收货地址表 
-   # 收货地址表
+ 
     create table neuedu_shopping(
     `id`       int(11)      not null  auto_increment,
     `user_id`       int(11)      not  null  ,
