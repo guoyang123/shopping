@@ -68,6 +68,7 @@ json 轻量级数据交换格式。
         
   <h1>mybatis-generator插件用法</h1>
    1,pom.xml添加插件
+   ```
        <plugin>
          <groupId>org.mybatis.generator</groupId>
          <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -77,8 +78,9 @@ json 轻量级数据交换格式。
            <overwrite>true</overwrite>
          </configuration>
        </plugin>
+    ```   
    2,pom中添加依赖
-          ```
+   ```
           <dependency>
                <groupId>mysql</groupId>
                <artifactId>mysql-connector-java</artifactId>
@@ -89,7 +91,7 @@ json 轻量级数据交换格式。
                <artifactId>mybatis-generator-core</artifactId>
                <version>1.3.5</version>
              </dependency>
-           ```
+    ```
     3，创建插件生成的配置文件
      generatorConfig.xml
        <?xml version="1.0" encoding="UTF-8" ?>
