@@ -66,8 +66,64 @@ json 轻量级数据交换格式。
       查询电子产品下所有的子类别？
         递归查询
         
-      
-    
+  <h1>mybatis-generator插件用法</h1>
+   1,pom.xml添加插件
+       <plugin>
+         <groupId>org.mybatis.generator</groupId>
+         <artifactId>mybatis-generator-maven-plugin</artifactId>
+         <version>1.3.6</version>
+         <configuration>
+           <verbose>true</verbose>
+           <overwrite>true</overwrite>
+         </configuration>
+       </plugin>
+   2,pom中添加依赖
+          <dependency>
+               <groupId>mysql</groupId>
+               <artifactId>mysql-connector-java</artifactId>
+               <version>5.1.47</version>
+             </dependency>
+             <dependency>
+               <groupId>org.mybatis.generator</groupId>
+               <artifactId>mybatis-generator-core</artifactId>
+               <version>1.3.5</version>
+             </dependency>
+    3，创建插件生成的配置文件
+     generatorConfig.xml
+       <?xml version="1.0" encoding="UTF-8" ?>
+       <!DOCTYPE generatorConfiguration PUBLIC
+               "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+               "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+       <generatorConfiguration>
+           <classPathEntry location=""/>
+           <context id="context" targetRuntime="MyBatis3Simple">
+               <commentGenerator>
+                   <property name="suppressAllComments" value="false"/>
+                   <property name="suppressDate" value="true"/>
+               </commentGenerator>
+               <jdbcConnection userId="" password="" driverClass="" connectionURL=""/>
+       
+               <javaTypeResolver>
+                   <property name="forceBigDecimals" value="false"/>
+               </javaTypeResolver>
+               <javaModelGenerator targetPackage="" targetProject=".">
+                   <property name="enableSubPackages" value="false"/>
+                   <property name="trimStrings" value="true"/>
+               </javaModelGenerator>
+       
+               <sqlMapGenerator targetPackage="" targetProject=".">
+                   <property name="enableSubPackages" value="false"/>
+               </sqlMapGenerator>
+       
+               <javaClientGenerator targetPackage="" type="XMLMAPPER" targetProject=".">
+                   <property name="enableSubPackages" value="false"/>
+               </javaClientGenerator>
+       
+               <table schema="" tableName="" enableCountByExample="false" enableDeleteByExample="false"
+                      enableSelectByExample="false" enableUpdateByExample="false"/>
+           </context>
+       </generatorConfiguration>
+  
   
       
 
