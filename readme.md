@@ -181,8 +181,9 @@
   
   
   ### 搭建ssm框架
-   1,pom.xml
-   2,添加配置文件 
+  
+    1,pom.xml
+    2,添加配置文件 
      spring配置文件
      springmvc配置文件
      mybatis配置文件
