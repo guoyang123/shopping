@@ -78,6 +78,7 @@ json 轻量级数据交换格式。
          </configuration>
        </plugin>
    2,pom中添加依赖
+          ```
           <dependency>
                <groupId>mysql</groupId>
                <artifactId>mysql-connector-java</artifactId>
@@ -88,6 +89,7 @@ json 轻量级数据交换格式。
                <artifactId>mybatis-generator-core</artifactId>
                <version>1.3.5</version>
              </dependency>
+           ```
     3，创建插件生成的配置文件
      generatorConfig.xml
        <?xml version="1.0" encoding="UTF-8" ?>
@@ -102,7 +104,6 @@ json 轻量级数据交换格式。
                    <property name="suppressDate" value="true"/>
                </commentGenerator>
                <jdbcConnection userId="" password="" driverClass="" connectionURL=""/>
-       
                <javaTypeResolver>
                    <property name="forceBigDecimals" value="false"/>
                </javaTypeResolver>
@@ -110,15 +111,12 @@ json 轻量级数据交换格式。
                    <property name="enableSubPackages" value="false"/>
                    <property name="trimStrings" value="true"/>
                </javaModelGenerator>
-       
                <sqlMapGenerator targetPackage="" targetProject=".">
                    <property name="enableSubPackages" value="false"/>
                </sqlMapGenerator>
-       
                <javaClientGenerator targetPackage="" type="XMLMAPPER" targetProject=".">
                    <property name="enableSubPackages" value="false"/>
                </javaClientGenerator>
-       
                <table schema="" tableName="" enableCountByExample="false" enableDeleteByExample="false"
                       enableSelectByExample="false" enableUpdateByExample="false"/>
            </context>
