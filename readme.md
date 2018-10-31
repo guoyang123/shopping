@@ -367,5 +367,9 @@
          step2:校验token是否有效
          step3:修改密码
          step4:返回结果
-   
-
+###迭代开发-线上部署
+        step1:在阿里云服务器上建库、建表
+        step2:修改代码中数据库的连接参数
+        step3:项目打成war包
+        step4:将war包上传到阿里云服务器的tomcat/webapps
+        step5:访问测试  
