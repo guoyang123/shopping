@@ -231,4 +231,11 @@ public class UserServiceImpl  implements IUserService{
         }
         return ServerResponse.serverResponseByError("更新个人信息失败");
     }
+
+    @Override
+    public UserInfo findUserInfoByUserid(Integer userId) {
+
+        return userInfoMapper.selectByPrimaryKey(userId);
+
+    }
 }

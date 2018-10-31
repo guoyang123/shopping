@@ -121,7 +121,13 @@ public class UserController {
             return ServerResponse.serverResponseByError("用户未登录");
         }
         user.setId(userInfo.getId());
-        return  userService.update_information(user);
+        ServerResponse serverResponse=  userService.update_information(user);
+        if(serverResponse.isSuccess()){
+            //更新session中用户信息
+           UserInfo userInfo1=   userService.findUserInfoByUserid(userInfo.getId());
+           session.setAttribute(Const.CURRENTUSER,userInfo1);
+        }
+        return  serverResponse;
     }
 
     /**

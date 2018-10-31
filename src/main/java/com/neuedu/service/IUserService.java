@@ -40,4 +40,10 @@ public interface IUserService {
      * 登录状态下更新个人信息
      * */
     ServerResponse update_information(UserInfo user);
+
+    /**
+     * 根据userid查询用户信息
+     * */
+    UserInfo findUserInfoByUserid(Integer userId);
+
 }
