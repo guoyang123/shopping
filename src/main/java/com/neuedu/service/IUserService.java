@@ -26,4 +26,18 @@ public interface IUserService {
     * 忘记密码的重置密码接口
     * */
     ServerResponse forget_reset_password(String username,String passwordNew,String forgetToken);
+
+   /**
+    * 校验用户名或邮箱是否有效
+    * */
+ ServerResponse check_valid(String str,String  type);
+    /**
+     *  登录中状态重置密码
+     * */
+    ServerResponse reset_password(String username,String passwordOld,String  passwordNew);
+
+    /**
+     * 登录状态下更新个人信息
+     * */
+    ServerResponse update_information(UserInfo user);
 }

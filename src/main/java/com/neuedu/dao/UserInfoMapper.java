@@ -78,4 +78,8 @@ public interface UserInfoMapper {
    * */
   int  updateUserPassowrd(@Param("username") String username,
                           @Param("password") String newPassword);
+  /**
+   * 更新用户信息
+   * */
+  int  updateUserBySelectActive(UserInfo userInfo);
 }
