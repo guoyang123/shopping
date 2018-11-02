@@ -427,17 +427,17 @@
                 增加商品    
                 更新商品
    #### 2，学习目标
-               FTP服务的对接
-               SpringMVC文件上传
-               流读取Properties配置文件
-               抽象POJO、BO、VO对象之间的转换关系及解决思路
-               joda-time快速入门
-               静态块
-               Mybatis-PageHelper高效准确地分页及动态排序
-               Mybatis对List遍历的实现方法
-               Mybatis对Where语句动态拼接
-               POJO、BO business object、VO view object
-                POJO、VO
+   FTP服务的对接
+   SpringMVC文件上传
+   流读取Properties配置文件
+   抽象POJO、BO、VO对象之间的转换关系及解决思路
+   joda-time快速入门
+   静态块
+   Mybatis-PageHelper高效准确地分页及动态排序
+   Mybatis对List遍历的实现方法
+   Mybatis对Where语句动态拼接
+   POJO、BO business object、VO view object
+    POJO、VO
   #### 3，业务逻辑
   ##### 3.1 后台-添加或更新商品
          step1:判断管理员权限
