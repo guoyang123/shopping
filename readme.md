@@ -457,4 +457,37 @@
          step2:参数非空校验
          step3:根据商品id查询商品信息Product
          step4：将Product转成ProductDetailVO
-         step5：返回结果      
+         step5：返回结果 
+   ##### 3.4 后台-分页查看商品列表
+            step1:判断管理员权限
+            step2:参数非空校验
+            step3:集成mybatis分页插件
+            step4:查询所有商品
+            step5：将List<Product>转成List<ProductListVO>
+            step6：返回结果          
+   ##### 3.5 后台-商品搜索
+            step1:判断管理员权限
+            step2:集成mybatis分页插件
+            step3:按照商品id或名称模糊查询
+            step4:将List<Product>转成List<ProductListVO>
+            step5:返回结果   
+            
+   ##### 3.6 后台-图片上传
+            step1:图片重命名
+            step2:图片保存到应用服务器
+            step3:上传到图片服务器
+            step4:将应用服务器的图片删除
+            step5:返回结果  
+  ##### 3.7 前台-商品详情
+            step1:参数校验
+            step2:查询商品
+            step3:校验商品状态
+            step4:商品转成VO
+            step5:返回结果          
+  ##### 3.7 前台-搜索商品并动态排序
+            step1:参数校验
+            step2:根据类别和关键字查询
+            step3:集成分页插件
+            step4:转成VO
+            step5:返回结果           
+                 

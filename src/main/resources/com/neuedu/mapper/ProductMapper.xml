@@ -117,4 +117,45 @@
     update_time, sub_images, detail
     from neuedu_product
   </select>
+
+  <select id="findProductByProductIdAndProductName" parameterType="map" resultMap="BaseResultMap">
+
+      select id, category_id, name, subtitle, main_image, price, stock, status, create_time,
+    update_time, sub_images, detail
+    from neuedu_product
+    <where>
+       <if test="productId!=null">
+         and id=#{productId}
+       </if>
+       <if test="productName!=null">
+          and name like #{productName}
+       </if>
+
+    </where>
+
+
+  </select>
+
+  <select id="searchProduct" parameterType="map" resultMap="BaseResultMap">
+
+      select id, category_id, name, subtitle, main_image, price, stock, status, create_time,
+    update_time, sub_images, detail
+    from neuedu_product
+    <where>
+         <if test="integerSet!=null and integerSet.size>0">
+
+            and  category_id IN
+           <foreach collection="integerSet" item="categoryId" open="(" close=")" separator=",">
+              #{categoryId}
+           </foreach>
+
+         </if>
+      <if test="keyword!=null">
+         and  name like #{keyword}
+      </if>
+    </where>
+
+  </select>
+
+
 </mapper>
