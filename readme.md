@@ -440,4 +440,19 @@
                 POJO、VO
   #### 3，业务逻辑
   ##### 3.1 后台-添加或更新商品
-   
+         step1:判断管理员权限
+         step2:参数非空校验
+         step3:设置商品的主图
+         step4：添加或更新商品
+         step5：返回结果
+   ##### 3.2 后台-商品上下架
+         step1:判断管理员权限
+         step2:参数非空校验
+         step3:更新商品状态
+         step4：返回结果
+   ##### 3.3 后台-查看商品详细
+         step1:判断管理员权限
+         step2:参数非空校验
+         step3:根据商品id查询商品信息Product
+         step4：将Product转成ProductDetailVO
+         step5：返回结果      
