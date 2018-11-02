@@ -91,11 +91,16 @@ public class UserController {
         if(userInfo==null){
             return ServerResponse.serverResponseByError("用户未登录");
         }
-        userInfo.setPassword("");
-        userInfo.setQuestion("");
-        userInfo.setAnswer("");
-        userInfo.setRole(null);
-        return  ServerResponse.serverResponseBySuccess(userInfo);
+
+        UserInfo newUserInfo=new UserInfo();
+        newUserInfo.setId(userInfo.getId());
+        newUserInfo.setUsername(userInfo.getUsername());
+        newUserInfo.setEmail(userInfo.getEmail());
+        newUserInfo.setPhone(userInfo.getPhone());
+        newUserInfo.setCreateTime(userInfo.getCreateTime());
+        newUserInfo.setUpdateTime(userInfo.getUpdateTime());
+
+        return  ServerResponse.serverResponseBySuccess(newUserInfo);
     }
 
   /**

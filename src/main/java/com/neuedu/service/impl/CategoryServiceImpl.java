@@ -5,6 +5,7 @@ import com.neuedu.common.ServerResponse;
 import com.neuedu.dao.CategoryMapper;
 import com.neuedu.pojo.Category;
 import com.neuedu.service.ICategoryService;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,10 @@ public class CategoryServiceImpl implements ICategoryService {
          if(categoryName==null||categoryName.equals("")){
              return ServerResponse.serverResponseByError("类别名称不能为空");
          }
+
+         //判断是否已添加该节点
+
+
         //step2: 添加节点
          Category category=new Category();
          category.setName(categoryName);
@@ -53,6 +58,7 @@ public class CategoryServiceImpl implements ICategoryService {
         //step3:返回结果
          if(result>0){
              //添加成功
+            
              return ServerResponse.serverResponseBySuccess();
          }
         return ServerResponse.serverResponseByError("添加失败");
