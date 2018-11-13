@@ -78,14 +78,7 @@ public class ProductManageController {
                                @RequestParam(value = "pageNum" ,required = false,defaultValue = "1")Integer pageNum,
                                @RequestParam(value = "pageSize" ,required = false,defaultValue = "10")Integer pageSize){
 
-        UserInfo userInfo=(UserInfo) session.getAttribute(Const.CURRENTUSER);
-        if(userInfo==null){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NEED_LOGIN.getCode(),Const.ReponseCodeEnum.NEED_LOGIN.getDesc());
-        }
-        //判断用户权限
-        if(userInfo.getRole()!=Const.RoleEnum.ROLE_ADMIN.getCode()){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NO_PRIVILEGE.getCode(),Const.ReponseCodeEnum.NO_PRIVILEGE.getDesc());
-        }
+
         return productService.list(pageNum,pageSize);
     }
 

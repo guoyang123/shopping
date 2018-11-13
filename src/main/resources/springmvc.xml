@@ -11,7 +11,9 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!--开启注解-->
-    <context:component-scan base-package="com.neuedu.controller" />
+    <context:component-scan base-package="com.neuedu.controller" >
+            <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!--配置控制前可以返回json格式的数据-->
     <mvc:annotation-driven>
@@ -42,6 +44,22 @@
             <value>5242880</value>
         </property>
     </bean>
+
+
+    <mvc:interceptors>
+        <!--拦截所有请求-->
+        <mvc:interceptor>
+            <!--
+               /manage/a
+               /manage/b/login.do
+               /manage/order/create.do
+            -->
+            <mvc:mapping path="/manage/**"/>
+            <mvc:exclude-mapping path="/manage/user/login.do"/>
+            <bean  class="com.neuedu.controller.common.intercepter.AuthorityInterceptor"></bean>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
 
 
 </beans>

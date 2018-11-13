@@ -22,6 +22,20 @@
     delete from neuedu_cart
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+
+  <delete id="batchDelete" parameterType="list">
+     delete from neuedu_cart
+     <where>
+         id in
+        <foreach collection="list" item="cart" open="(" close=")" separator=",">
+          #{cart.id}
+        </foreach>
+     </where>
+
+
+  </delete>
+
   <insert id="insert" parameterType="com.neuedu.pojo.Cart">
     <!--
       WARNING - @mbg.generated
@@ -31,8 +45,8 @@
       quantity, checked, create_time, 
       update_time)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, 
-      #{quantity,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{quantity,jdbcType=INTEGER}, #{checked,jdbcType=INTEGER},now(),
+      now())
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.neuedu.pojo.Cart">
     <!--
@@ -44,8 +58,7 @@
       product_id = #{productId,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER},
       checked = #{checked,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -65,4 +78,66 @@
     select id, user_id, product_id, quantity, checked, create_time, update_time
     from neuedu_cart
   </select>
+
+  <select id="selectCartByUseridAndProductId" resultType="map" resultMap="BaseResultMap">
+
+     select id, user_id, product_id, quantity, checked, create_time, update_time
+    from neuedu_cart WHERE  user_id=#{userId} and product_id=#{productId}
+
+
+  </select>
+  <select id="selectCartByUserid" resultType="int" resultMap="BaseResultMap">
+
+    select id, user_id, product_id, quantity, checked, create_time, update_time
+    from neuedu_cart WHERE  user_id=#{userId}
+
+  </select>
+  <select id="isCheckedAll" parameterType="int" resultType="int">
+     select count(1) from neuedu_cart where user_id=#{userId} and checked=0
+
+  </select>
+
+
+  <delete id="deleteByUseridAndProductIds" parameterType="map">
+
+     DELETE  from neuedu_cart
+     <where>
+        user_id=#{userId}
+        <if test="productIdList!=null and productIdList.size>0">
+          and product_id IN
+          <foreach collection="productIdList" item="productId" open="(" close=")" separator=",">
+             #{productId}
+          </foreach>
+        </if>
+
+     </where>
+
+  </delete>
+
+
+  <update id="selectOrUnselectProduct" parameterType="map">
+
+    UPDATE  neuedu_cart
+    set checked=#{check}
+    <where>
+       user_id=#{userId}
+       <if test="productId!=null">
+          and product_id=#{productId}
+       </if>
+    </where>
+
+  </update>
+
+  <select id="get_cart_product_count" parameterType="int" resultType="int">
+
+    select   ifnull(sum(quantity),0)   from neuedu_cart where user_id=#{userId}
+  </select>
+
+  <select id="findCartListByUserIdAndChecked" parameterType="int" resultMap="BaseResultMap">
+
+     select id, user_id, product_id, quantity, checked, create_time, update_time
+    from neuedu_cart WHERE  user_id=#{userId} and checked=1
+
+  </select>
+
 </mapper>

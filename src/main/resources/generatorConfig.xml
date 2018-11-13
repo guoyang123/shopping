@@ -30,7 +30,7 @@
         </javaClientGenerator>
 
         <!--配置数据表-->
-        <table  tableName="neuedu_user" domainObjectName="UserInfo"  enableCountByExample="false" enableDeleteByExample="false"
+      <!--  <table  tableName="neuedu_user" domainObjectName="UserInfo"  enableCountByExample="false" enableDeleteByExample="false"
                enableSelectByExample="false" enableUpdateByExample="false"/>
         <table  tableName="neuedu_category" domainObjectName="Category"  enableCountByExample="false" enableDeleteByExample="false"
                 enableSelectByExample="false" enableUpdateByExample="false"/>
@@ -43,8 +43,8 @@
         <table  tableName="neuedu_order_item" domainObjectName="OrderItem"  enableCountByExample="false" enableDeleteByExample="false"
                 enableSelectByExample="false" enableUpdateByExample="false"/>
         <table  tableName="neuedu_payinfo" domainObjectName="PayInfo"  enableCountByExample="false" enableDeleteByExample="false"
-                enableSelectByExample="false" enableUpdateByExample="false"/>
-        <table  tableName="neuedu_shipping" domainObjectName="Shipping"  enableCountByExample="false" enableDeleteByExample="false"
+                enableSelectByExample="false" enableUpdateByExample="false"/>-->
+        <table  tableName="neuedu_shopping" domainObjectName="Shipping"  enableCountByExample="false" enableDeleteByExample="false"
                 enableSelectByExample="false" enableUpdateByExample="false"/>
 
 

@@ -237,6 +237,10 @@ public class ProductServiceImpl implements IProductService {
             Map<String,String> map= Maps.newHashMap();
             map.put("uri",newFileName);
             map.put("url",PropertiesUtils.readByKey("imageHost")+"/"+newFileName);
+
+            //删除应用服务器上的图片
+            file1.delete();
+
             return ServerResponse.serverResponseBySuccess(map);
         } catch (IOException e) {
             e.printStackTrace();

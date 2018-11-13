@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
+
+//  http://locahost:8080/shopping/productId/1
+
 @RestController
 @RequestMapping(value = "/manage/category")
 public class CategoryManageController {
@@ -22,14 +25,8 @@ public class CategoryManageController {
      * */
     @RequestMapping(value = "/get_category.do")
     public ServerResponse get_category(HttpSession session, Integer categoryId){
-       UserInfo userInfo=(UserInfo) session.getAttribute(Const.CURRENTUSER);
-        if(userInfo==null){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NEED_LOGIN.getCode(),Const.ReponseCodeEnum.NEED_LOGIN.getDesc());
-        }
-        //判断用户权限
-        if(userInfo.getRole()!=Const.RoleEnum.ROLE_ADMIN.getCode()){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NO_PRIVILEGE.getCode(),Const.ReponseCodeEnum.NO_PRIVILEGE.getDesc());
-        }
+       int couont=3/0;
+
         return  categoryService.get_category(categoryId);
     }
 
@@ -40,14 +37,7 @@ public class CategoryManageController {
     public ServerResponse add_category(HttpSession session,
                                        @RequestParam(required = false,defaultValue = "0") Integer parentId,
                                        String categoryName){
-        UserInfo userInfo=(UserInfo) session.getAttribute(Const.CURRENTUSER);
-        if(userInfo==null){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NEED_LOGIN.getCode(),Const.ReponseCodeEnum.NEED_LOGIN.getDesc());
-        }
-        //判断用户权限
-        if(userInfo.getRole()!=Const.RoleEnum.ROLE_ADMIN.getCode()){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NO_PRIVILEGE.getCode(),Const.ReponseCodeEnum.NO_PRIVILEGE.getDesc());
-        }
+
         return  categoryService.add_category(parentId,categoryName);
     }
 
@@ -58,14 +48,7 @@ public class CategoryManageController {
     public ServerResponse set_category_name(HttpSession session,
                                         Integer categoryId,
                                        String categoryName){
-        UserInfo userInfo=(UserInfo) session.getAttribute(Const.CURRENTUSER);
-        if(userInfo==null){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NEED_LOGIN.getCode(),Const.ReponseCodeEnum.NEED_LOGIN.getDesc());
-        }
-        //判断用户权限
-        if(userInfo.getRole()!=Const.RoleEnum.ROLE_ADMIN.getCode()){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NO_PRIVILEGE.getCode(),Const.ReponseCodeEnum.NO_PRIVILEGE.getDesc());
-        }
+
         return  categoryService.set_category_name(categoryId,categoryName);
     }
 
@@ -76,14 +59,7 @@ public class CategoryManageController {
     @RequestMapping(value = "/get_deep_category.do")
     public ServerResponse get_deep_category(HttpSession session,
                                             Integer categoryId){
-        UserInfo userInfo=(UserInfo) session.getAttribute(Const.CURRENTUSER);
-        if(userInfo==null){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NEED_LOGIN.getCode(),Const.ReponseCodeEnum.NEED_LOGIN.getDesc());
-        }
-        //判断用户权限
-        if(userInfo.getRole()!=Const.RoleEnum.ROLE_ADMIN.getCode()){
-            return ServerResponse.serverResponseByError(Const.ReponseCodeEnum.NO_PRIVILEGE.getCode(),Const.ReponseCodeEnum.NO_PRIVILEGE.getDesc());
-        }
+
         return  categoryService.get_deep_category(categoryId);
     }
 

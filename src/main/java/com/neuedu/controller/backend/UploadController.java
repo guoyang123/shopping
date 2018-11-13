@@ -28,7 +28,8 @@ public class UploadController {
     public ServerResponse upload2(@RequestParam(value = "upload_file",required = false) MultipartFile file){
 
 
-       String path="D:\\ftpfile";
+      // String path="D:\\ftpfile";
+        String path="/usr/gy/developer/img";
         return productService.upload(file,path); //逻辑视图     前缀+逻辑视图+后缀  --》 /WEB-INF/jsp/upload.jsp
     }
 
