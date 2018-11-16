@@ -41,11 +41,13 @@ import com.neuedu.vo.CartOrderItemVO;
 import com.neuedu.vo.OrderItemVO;
 import com.neuedu.vo.OrderVO;
 import com.neuedu.vo.ShippingVO;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,6 +69,8 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     PayInfoMapper payInfoMapper;
 
+
+    @Transactional
     @Override
     public ServerResponse createOrder(Integer userId, Integer shippingId) {
 
@@ -94,6 +98,9 @@ public class OrderServiceImpl implements IOrderService {
         }
         orderTotalPrice=getOrderPrice(orderItemList);
         Order order=createOrder(userId,shippingId,orderTotalPrice);
+
+         int a=3/0;
+
         if(order==null){
             return ServerResponse.serverResponseByError("订单创建失败");
         }
@@ -487,6 +494,40 @@ public class OrderServiceImpl implements IOrderService {
             return ServerResponse.serverResponseBySuccess(true);
         }
         return ServerResponse.serverResponseBySuccess(false);
+    }
+
+    @Transactional
+    @Override
+    public void closeOrder(String time) {
+        //step1:查询订单创建时间 <time的未付款的订单
+        List<Order> orderList=orderMapper.findOrderByCreateTime(Const.OrderStatusEnum.ORDER_UN_PAY.getCode(),time);
+        if(orderList!=null&&orderList.size()>0){
+            for(Order order:orderList){
+               List<OrderItem> orderItemList= orderItemMapper.findOrderItemsByOrderno(order.getOrderNo());
+                if(orderItemList!=null&&orderItemList.size()>0){
+                    for(OrderItem orderItem:orderItemList){
+                       Integer stock=  productMapper.findStockByProductId(orderItem.getProductId());
+                       // stock =100
+                       if(stock==null){
+                           continue;
+                       }
+                        //更新商品库存
+                        stock=stock+orderItem.getQuantity();
+
+                        Product product=new Product();
+                        product.setId(orderItem.getProductId());
+                        product.setStock(stock);
+                       productMapper.updateProductKeySelective(product);
+                    }
+                }
+                //关闭订单
+                order.setStatus(Const.OrderStatusEnum.ORDER_CANCELED.getCode());
+                order.setCloseTime(new Date());
+                orderMapper.updateByPrimaryKey(order);
+            }
+
+        }
+
     }
 
     ////////////////////////////////////支付相关///////////////////////////////////////

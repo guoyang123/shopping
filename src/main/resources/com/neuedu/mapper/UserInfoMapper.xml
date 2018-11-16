@@ -141,4 +141,15 @@
     where username=#{username} and question=#{question} and answer=#{answer}
   </select>
 
+  <select id="findUserInfoByToken" parameterType="string">
+
+     select id, username, password, email, phone, question, answer, role, create_time,
+    update_time
+    from neuedu_user  where token=#{token}
+  </select>
+
+  <update id="updateTokenByUserId" parameterType="map">
+    UPDATE  neuedu_user set token=#{token} where id=#{userId}
+  </update>
+
 </mapper>

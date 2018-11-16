@@ -13,6 +13,7 @@ import com.neuedu.vo.CartProductVO;
 import com.neuedu.vo.CartVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.JedisPoolConfig;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -25,7 +25,7 @@ public class CategoryManageController {
      * */
     @RequestMapping(value = "/get_category.do")
     public ServerResponse get_category(HttpSession session, Integer categoryId){
-       int couont=3/0;
+    //   int couont=3/0;
 
         return  categoryService.get_category(categoryId);
     }

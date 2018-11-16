@@ -7,6 +7,7 @@ import com.neuedu.pojo.UserInfo;
 import com.neuedu.service.IUserService;
 import com.neuedu.utils.MD5Utils;
 import com.neuedu.utils.TokenCache;
+import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -235,7 +236,21 @@ public class UserServiceImpl  implements IUserService{
     @Override
     public UserInfo findUserInfoByUserid(Integer userId) {
 
+
         return userInfoMapper.selectByPrimaryKey(userId);
 
+    }
+
+    @Override
+    public int updateTokenByUserId(Integer userId, String token) {
+        return userInfoMapper.updateTokenByUserId(userId,token);
+    }
+
+    @Override
+    public UserInfo findUserInfoByToken(String token) {
+        if(token==null||token.equals("")){
+            return null;
+        }
+        return userInfoMapper.findUserInfoByToken(token);
     }
 }

@@ -6,6 +6,7 @@ public class Const {
 
     public  static final String TRADE_SUCCESS= "TRADE_SUCCESS";
 
+    public static  final String AUTOLOGINTOKEN="autoLoginToken";
 
     public  enum  ReponseCodeEnum{
 
