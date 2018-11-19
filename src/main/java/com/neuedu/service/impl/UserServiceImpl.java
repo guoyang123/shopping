@@ -6,6 +6,7 @@ import com.neuedu.dao.UserInfoMapper;
 import com.neuedu.pojo.UserInfo;
 import com.neuedu.service.IUserService;
 import com.neuedu.utils.MD5Utils;
+import com.neuedu.utils.RedisPoolUtil;
 import com.neuedu.utils.TokenCache;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,7 +119,8 @@ public class UserServiceImpl  implements IUserService{
         //step3:服务端生成一个token保存并将token返回给客户端。
          String  forgetToken= UUID.randomUUID().toString();
          //guava cache
-        TokenCache.set(username,forgetToken);
+        //TokenCache.set(username,forgetToken);
+        RedisPoolUtil.set(username,forgetToken);
 
         return ServerResponse.serverResponseBySuccess(forgetToken);
     }
@@ -140,7 +142,8 @@ public class UserServiceImpl  implements IUserService{
         }
 
         //step2:token校验
-       String token= TokenCache.get(username);
+      // String token= TokenCache.get(username);
+        String token=RedisPoolUtil.get(username);
         if(token==null){
             return ServerResponse.serverResponseByError("token过期");
         }

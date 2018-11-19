@@ -31,7 +31,7 @@ public class RedisPool {
 
         config.setMaxTotal(maxTotal);
         config.setMaxIdle(maxIdle);
-        config.setMaxIdle(maxIdle);
+        config.setMinIdle(minIdle);
 
         config.setTestOnBorrow(testOnBorrow);
         config.setTestOnReturn(testOnReturn);
@@ -61,6 +61,7 @@ public class RedisPool {
 
         Jedis jedis=getJedis();
         jedis.set("username","zhangsan");
+
         returnResource(jedis);
         pool.destroy();
         System.out.println("=====program is end===");
