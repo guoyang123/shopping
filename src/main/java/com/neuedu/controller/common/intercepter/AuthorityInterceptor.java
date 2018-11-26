@@ -2,9 +2,13 @@ package com.neuedu.controller.common.intercepter;
 
 import com.google.gson.Gson;
 import com.neuedu.common.Const;
+import com.neuedu.common.RedisPool;
 import com.neuedu.common.ServerResponse;
 import com.neuedu.pojo.UserInfo;
 import com.neuedu.service.IUserService;
+import com.neuedu.utils.CookieUtils;
+import com.neuedu.utils.JsonUtils;
+import com.neuedu.utils.RedisPoolUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -34,8 +38,12 @@ public class AuthorityInterceptor   implements HandlerInterceptor{
        String methodName=handlerMethod.getMethod().getName();
 
         HttpSession session= httpServletRequest.getSession();
-        UserInfo userInfo=(UserInfo) session.getAttribute(Const.CURRENTUSER);
-
+        String jessionid=CookieUtils.readCookie(httpServletRequest,Const.JESSESSIONID_COOKIE);
+        String userInfoStr=RedisPoolUtil.get(jessionid);
+        UserInfo userInfo=null;
+        if(userInfoStr!=null){
+            userInfo =JsonUtils.string2Obj(userInfoStr,UserInfo.class);
+        }
         if(userInfo==null){//从cookie中获取token信息
 
            Cookie[] cookies= httpServletRequest.getCookies();
@@ -47,7 +55,9 @@ public class AuthorityInterceptor   implements HandlerInterceptor{
                       //根据token查询用户信息
                       userInfo=userService.findUserInfoByToken(autoLoginToken);
                       if(userInfo!=null){
-                          session.setAttribute(Const.CURRENTUSER,userInfo);
+                        // session.setAttribute(Const.CURRENTUSER,userInfo);
+                         String userstr= JsonUtils.obj2String(userInfo);
+                          RedisPoolUtil.set(session.getId(),userstr);
                       }
                       break;
                   }

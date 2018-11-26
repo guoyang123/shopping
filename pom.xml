@@ -221,6 +221,14 @@
       <version>2.8.0</version>
     </dependency>
 
+    <!--jackson-->
+    <!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl -->
+    <dependency>
+      <groupId>org.codehaus.jackson</groupId>
+      <artifactId>jackson-mapper-asl</artifactId>
+      <version>1.9.8</version>
+    </dependency>
+
 
 
   </dependencies>

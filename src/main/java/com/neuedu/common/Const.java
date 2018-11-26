@@ -8,6 +8,7 @@ public class Const {
 
     public static  final String AUTOLOGINTOKEN="autoLoginToken";
 
+    public static  final String JESSESSIONID_COOKIE="JESSIONID_COOKIE";
     public  enum  ReponseCodeEnum{
 
          NEED_LOGIN(2,"需要登录"),

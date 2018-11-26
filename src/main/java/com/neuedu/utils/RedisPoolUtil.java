@@ -114,7 +114,8 @@ public class RedisPoolUtil {
     public static void main(String[] args) {
 
         setex("user","lisi",10);
-
+        System.out.println(get("user"));
     }
+
 
 }
